@@ -176,12 +176,55 @@ Feel free to submit issues and enhancement requests!
 
 This project is open source and available under the [MIT License](LICENSE).
 
+## Cloud Deployment - AWS EC2
+
+### Deployment Strategy
+This project is designed for **AWS EC2 deployment** with the following architecture:
+
+#### **Recommended EC2 Configuration:**
+- **Instance Type**: t3.medium or t3.large
+- **CPU**: 2-4 vCPUs
+- **Memory**: 4-8GB RAM
+- **Storage**: 20GB+ SSD
+- **OS**: Ubuntu 20.04 LTS
+
+#### **Deployment Pipeline:**
+1. **Model Training**: Local development → Train BERT model (97.50% accuracy)
+2. **Model Export**: Save trained model checkpoints
+3. **EC2 Setup**: Launch instance, install dependencies
+4. **Model Deployment**: Upload model files to EC2
+5. **API Development**: Flask/FastAPI for sentiment analysis endpoint
+6. **Load Balancing**: Handle multiple concurrent requests
+7. **Monitoring**: Performance tracking and model health
+
+#### **Expected Performance on EC2:**
+- **Inference Time**: 2-5 seconds per comment (CPU-based)
+- **Concurrent Requests**: 10-50 requests/minute
+- **Memory Usage**: 2-4GB RAM
+- **Startup Time**: 30-60 seconds (model loading)
+
+#### **Production Features:**
+- **RESTful API**: `/analyze` endpoint for sentiment analysis
+- **Batch Processing**: Handle multiple comments simultaneously
+- **Error Handling**: Graceful failure management
+- **Logging**: Request/response logging
+- **Security**: API key authentication
+- **Scaling**: Auto-scaling based on demand
+
+### Current Status
+- ✅ **Model Development**: Complete (97.50% BERT accuracy)
+- ✅ **Performance Optimization**: GPU training completed
+- 🔄 **EC2 Deployment**: In progress
+- ⏳ **API Development**: Planned
+- ⏳ **Production Testing**: Planned
+
 ## Future Enhancements
 
-- **AWS EC2 Cloud Deployment**: Production-ready deployment pipeline
-- **API Endpoint**: RESTful API for real-time sentiment analysis
-- **Model Serving**: Scalable model serving infrastructure
-- **Monitoring**: Performance monitoring and model drift detection
+- **AWS Lambda Integration**: Serverless sentiment analysis
+- **Real-time Processing**: Stream processing capabilities
+- **Multi-language Support**: Extend to other languages
+- **Advanced Analytics**: Sentiment trends and insights
+- **Mobile App**: iOS/Android sentiment analysis app
 
 ---
 
