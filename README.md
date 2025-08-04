@@ -75,24 +75,35 @@ Sentimental-analysis/
 
 ## Usage
 
-### Option 1: SVM Model (Traditional ML - 91.22% Accuracy)
+### Option 1: Live API (Production - 97.50% Accuracy)
+```bash
+# Test the live API
+curl -X POST http://16.16.187.62:5000/analyze \
+  -H "Content-Type: application/json" \
+  -d '{"text": "I love this product!"}'
+
+# Health check
+curl http://16.16.187.62:5000/health
+```
+
+### Option 2: SVM Model (Traditional ML - 91.22% Accuracy)
 ```bash
 jupyter notebook sentiment.ipynb
 ```
 
-### Option 2: BERT Model (Deep Learning - 97.50% Accuracy)
+### Option 3: BERT Model (Deep Learning - 97.50% Accuracy)
 ```bash
 cd Sentiment-Analysis-SVM/BERT
 python simple_bert.py
 ```
 **Note:** BERT model checkpoints are not included due to size (>100MB). The script will train the model from scratch (~1.5 hours) or download pre-trained model automatically.
 
-### Option 3: Random Forest Model (For Comparison)
+### Option 4: Random Forest Model (For Comparison)
 ```bash
 jupyter notebook RandomForestModel/RFMJ.ipynb
 ```
 
-### Option 4: Python Script
+### Option 5: Python Script
 ```bash
 python sentiment.py
 ```
@@ -107,7 +118,10 @@ python sentiment.py
 - **Jupyter Notebook** for interactive development
 - **Pandas** for data manipulation
 - **CUDA** for GPU acceleration
-- **AWS EC2** for cloud deployment (planned)
+- **AWS EC2** for cloud deployment (production)
+- **Flask** for API server
+- **Flask-Limiter** for rate limiting
+- **CORS** for frontend integration
 
 ## Model Details
 
@@ -167,6 +181,9 @@ This project demonstrates:
 - GPU acceleration and optimization techniques
 - Progression from traditional ML to state-of-the-art deep learning
 - Cloud deployment pipeline design for production systems
+- **Production deployment** with AWS EC2 and Flask API
+- **Security implementation** with rate limiting and monitoring
+- **Cost management** with free tier optimization and budget alerts
 
 ## Contributing
 
@@ -197,34 +214,42 @@ This project is designed for **AWS EC2 deployment** with the following architect
 6. **Load Balancing**: Handle multiple concurrent requests
 7. **Monitoring**: Performance tracking and model health
 
-#### **Expected Performance on EC2:**
-- **Inference Time**: 2-5 seconds per comment (CPU-based)
-- **Concurrent Requests**: 10-50 requests/minute
-- **Memory Usage**: 2-4GB RAM
+#### **Actual Performance on EC2:**
+- **Inference Time**: <2 seconds per comment (CPU-based)
+- **Concurrent Requests**: 10 requests/minute (rate limited)
+- **Memory Usage**: ~4GB RAM (BERT model loaded)
 - **Startup Time**: 30-60 seconds (model loading)
+- **API Endpoint**: `http://16.16.187.62:5000/analyze`
+- **Health Check**: `http://16.16.187.62:5000/health`
 
 #### **Production Features:**
 - **RESTful API**: `/analyze` endpoint for sentiment analysis
-- **Batch Processing**: Handle multiple comments simultaneously
+- **Rate Limiting**: 10 requests/minute per IP address
 - **Error Handling**: Graceful failure management
-- **Logging**: Request/response logging
-- **Security**: API key authentication
-- **Scaling**: Auto-scaling based on demand
+- **Logging**: Request/response logging with `api.log`
+- **Security**: Rate limiting protection against abuse
+- **Background Process**: 24/7 operation with `nohup`
+- **CORS Enabled**: Ready for frontend integration
 
 ### Current Status
 - ✅ **Model Development**: Complete (97.50% BERT accuracy)
 - ✅ **Performance Optimization**: GPU training completed
-- 🔄 **EC2 Deployment**: In progress
-- ⏳ **API Development**: Planned
-- ⏳ **Production Testing**: Planned
+- ✅ **EC2 Deployment**: Complete (m7i-flex.large instance)
+- ✅ **API Development**: Complete (Flask server with rate limiting)
+- ✅ **Production Testing**: Complete (API live and tested)
+- ✅ **Security Implementation**: Rate limiting (10 requests/minute)
+- ✅ **Cost Management**: Budget alerts and free tier monitoring
 
 ## Future Enhancements
 
-- **AWS Lambda Integration**: Serverless sentiment analysis
-- **Real-time Processing**: Stream processing capabilities
+- **Vercel Frontend**: React/Next.js web application
+- **API Key Authentication**: Secure access control
+- **Advanced Rate Limiting**: User-based quotas
 - **Multi-language Support**: Extend to other languages
 - **Advanced Analytics**: Sentiment trends and insights
 - **Mobile App**: iOS/Android sentiment analysis app
+- **AWS Lambda Integration**: Serverless sentiment analysis
+- **Real-time Processing**: Stream processing capabilities
 
 ---
 
