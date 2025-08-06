@@ -1,107 +1,114 @@
-# Sentiment Analysis Tool
+# Sentiment Analysis Project
 
-A machine learning-based text sentiment analysis tool that classifies comments as positive, negative, or neutral with **91.16% accuracy**.
+This project analyzes text to determine if the sentiment is positive, negative, or neutral. It uses machine learning to achieve **91% accuracy**.
 
-## 🎯 Features
+## What This Project Does
 
-- **High Accuracy**: Achieved 91.16% classification accuracy using SVM with optimized feature engineering
-- **Text Preprocessing**: Handles cleaned text data with special characters removed
-- **Advanced Feature Engineering**: Combines word-level and character-level TF-IDF features
-- **Class Balance Handling**: Optimized for imbalanced sentiment distributions
-- **Fast Training**: Efficient SVM implementation without unnecessary complexity
+- Analyzes text comments and determines their sentiment (positive/negative/neutral)
+- Uses advanced machine learning techniques for high accuracy
+- Includes multiple models: SVM, BERT, Naive Bayes, Random Forest, and XGBoost
+- Provides easy-to-use notebooks and scripts
 
-## 📊 Performance Evolution
+## Quick Start
 
-| Model/Improvement | Accuracy | Change |
-|------------------|----------|---------|
-| Initial Logistic Regression | 86.73% | Baseline |
-| Basic SVM (LinearSVC) | 89.2% | +2.47% |
-| Enhanced TF-IDF Features | 90.70% | +1.5% |
-| **Final Optimized SVM** | **91.16%** | **+4.43%** |
-
-## 🛠️ Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone <repository-url>
-   cd Sentimental-analysis
-   ```
-
-2. **Install required packages:**
-   ```bash
-   pip install pandas numpy scikit-learn matplotlib jupyter
-   ```
-
-## 📁 Project Structure
-
-```
-Sentimental-analysis/
-├── sentiment.ipynb          # Main Jupyter notebook with complete pipeline
-├── cleaned_data.csv         # Preprocessed training data
-├── data.csv                 # Original dataset
-├── sentiment_analysis_results.png  # Visualization results
-└── svm_accuracy_results.png        # SVM performance charts
-```
-
-## 🚀 Usage
-
-### Option 1: Jupyter Notebook (Recommended)
+### 1. Get the Project
 ```bash
-jupyter notebook sentiment.ipynb
+git clone <repository-url>
+cd Sentiment-Analysis-SVM
 ```
 
-### Option 2: Python Script
+### 2. Install Requirements
 ```bash
-python sentiment.py
+pip install pandas numpy scikit-learn matplotlib jupyter transformers torch
 ```
 
-## 🔧 Technical Stack
+### 3. Run the Analysis
+Choose one of these options:
 
-- **Python** with scikit-learn
-- **SVM (LinearSVC)** for classification
-- **TF-IDF Vectorization** with feature union
-- **Jupyter Notebook** for interactive development
-- **Pandas** for data manipulation
+**Option A: Use Jupyter Notebook (Recommended)**
+```bash
+jupyter notebook
+```
+Then open any of the `.ipynb` files in the model folders.
 
-## 📈 Model Details
+**Option B: Run Python Scripts**
+```bash
+# SVM Model
+python SVM_Model/sentiment.py
 
-### Feature Engineering
-- **Word-level TF-IDF**: 12,000 features with 1-3 n-grams
-- **Character-level TF-IDF**: 5,000 features with 3-5 n-grams
-- **Feature Union**: Combines both approaches for better representation
+# BERT Model  
+python BERT/simple_bert.py
 
-### Model Parameters
-- **Algorithm**: LinearSVC (Support Vector Machine)
-- **Regularization**: C=2.5 (balanced strictness)
-- **Max Iterations**: 5,000 for convergence
-- **Loss Function**: Hinge loss
+# Naive Bayes
+python NB/simple_naive_bayes.py
 
-## 📊 Results
+# Random Forest
+python RandomForestModel/RFP.py
 
-The model achieves excellent performance across all sentiment classes:
+# XGBoost
+python XG_Boost/simple_xgboost.py
+```
 
-- **Overall Accuracy**: 91.16%
-- **Precision**: High across positive, negative, and neutral classes
-- **Recall**: Balanced performance for all sentiment types
-- **F1-Score**: Strong harmonic mean of precision and recall
+## Project Structure
 
-## 🎓 Learning Outcomes
+```
+Sentiment-Analysis-SVM/
+├── SVM_Model/              # Support Vector Machine implementation
+├── BERT/                   # BERT transformer model
+├── NB/                     # Naive Bayes classifier
+├── RandomForestModel/      # Random Forest algorithm
+├── XG_Boost/              # XGBoost gradient boosting
+├── data.csv               # Original dataset
+└── cleaned_data.csv       # Preprocessed data
+```
 
-This project demonstrates:
-- Complete ML pipeline from data preprocessing to model evaluation
-- Feature engineering techniques for text classification
-- Model selection and hyperparameter tuning
-- Performance optimization strategies
-- Interactive development with Jupyter notebooks
+## Model Performance
 
-## 🤝 Contributing
+| Model | Accuracy | Best For |
+|-------|----------|----------|
+| SVM | 91.16% | Overall best performance |
+| BERT | ~90% | Advanced language understanding |
+| Random Forest | ~88% | Good balance of speed/accuracy |
+| Naive Bayes | ~85% | Fast and simple |
+| XGBoost | ~87% | Gradient boosting approach |
 
-Feel free to submit issues and enhancement requests!
+## How It Works
 
-## 📝 License
+1. **Data Preparation**: Text is cleaned and preprocessed
+2. **Feature Extraction**: Words and characters are converted to numerical features
+3. **Model Training**: Machine learning models learn patterns from the data
+4. **Prediction**: New text is classified as positive, negative, or neutral
 
-This project is open source and available under the [MIT License](LICENSE).
+## Key Features
+
+- **Multiple Models**: Compare different machine learning approaches
+- **High Accuracy**: 91% accuracy with the SVM model
+- **Easy to Use**: Simple scripts and notebooks
+- **Visual Results**: Charts and graphs showing performance
+- **Clean Code**: Well-organized and documented
+
+## Requirements
+
+- Python 3.7+
+- pandas, numpy, scikit-learn
+- matplotlib, jupyter
+- transformers, torch (for BERT)
+
+## Getting Help
+
+If you run into issues:
+1. Check that all requirements are installed
+2. Make sure you're in the correct directory
+3. Try running the Jupyter notebooks first
+
+## Contributing
+
+Feel free to:
+- Report bugs
+- Suggest improvements
+- Add new features
+- Improve documentation
 
 ---
 
-*Built as a learning project to understand machine learning pipelines and text classification techniques.*
+*This project demonstrates various machine learning approaches for sentiment analysis, from simple classifiers to advanced transformer models.*
